@@ -1,0 +1,145 @@
+:root {
+  --jbmod-orange: #f08a1d;
+  --jbmod-bg-dark: #121212;
+  --jbmod-header-dark: #0a0a0a;
+  --jbmod-card-dark: #1a1a1a;
+}
+
+/* ==========================================================================
+   Dark Theme
+   ========================================================================== */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: var(--jbmod-bg-dark);
+  --md-default-fg-color: rgba(255, 255, 255, 0.85);
+  --md-code-bg-color: #1e1e1e;
+  --md-primary-fg-color: var(--jbmod-header-dark);
+  --md-accent-fg-color: var(--jbmod-orange);
+}
+
+[data-md-color-scheme="slate"] .md-header {
+  background-color: var(--jbmod-header-dark) !important;
+  border-bottom: 2px solid var(--jbmod-orange);
+}
+
+[data-md-color-scheme="slate"] .md-header__title,
+[data-md-color-scheme="slate"] .md-header__button {
+  color: #fff !important;
+}
+
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: var(--jbmod-header-dark) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-md-color-scheme="slate"] .md-content__inner {
+  background-color: var(--jbmod-card-dark);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  color: #fff !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__form {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-md-color-scheme="slate"] .md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__icon {
+  color: #fff !important;
+}
+
+/* ==========================================================================
+   Light Theme
+   ========================================================================== */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #ffffff;
+  --md-accent-fg-color: var(--jbmod-orange);
+}
+
+[data-md-color-scheme="default"] .md-header {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-bottom: 2px solid var(--jbmod-orange);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-header__button {
+  color: #000 !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid #eee;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link {
+  color: #555 !important;
+}
+
+[data-md-color-scheme="default"] .md-content__inner {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+[data-md-color-scheme="default"] .md-typeset h1,
+[data-md-color-scheme="default"] .md-typeset h2,
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #000 !important;
+}
+
+[data-md-color-scheme="default"] .md-search__form {
+  background-color: #f1f3f4 !important;
+  border: 1px solid #ddd;
+}
+
+/* ==========================================================================
+   Global Shared Styles
+   ========================================================================== */
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.md-content__inner {
+  padding: 2rem !important;
+  margin-top: 2rem;
+}
+
+.md-typeset h1 strong,
+.md-typeset h1 em {
+  color: var(--jbmod-orange);
+  font-style: normal;
+}
+
+.md-tabs__link--active,
+.md-nav__link--active {
+  color: var(--jbmod-orange) !important;
+}
+
+.md-typeset a {
+  color: var(--jbmod-orange);
+}
+
+.md-typeset .admonition {
+  border-radius: 8px;
+}
