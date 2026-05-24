@@ -1,7 +1,7 @@
 site_name: JBMod Documentation
-site_url: https://docs.jbmod.dev
-repo_url: https://github.com/jbmod/docs
-repo_name: jbmod/docs
+site_url: https://krolot.github.io/JBDevWiki/
+repo_url: https://github.com/Krolot/JBDevWiki
+repo_name: Krolot/JBDevWiki
 edit_uri: edit/main/docs/
 
 theme:
