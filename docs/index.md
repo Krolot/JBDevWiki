@@ -1,12 +1,10 @@
-# Welcome to JBMod.dev
+# Welcome to the JBMod Dev Wiki
 
-JBMod is a classic sandbox mod for the Source Engine, now open-sourced and being rebuilt from the ground up.
+Not to be confused with docs.jbmod.dev this Wiki was created with the purpose of being an alternative to the page already mentioned, this Wiki will have a lot of documentation for various JBMod systems, specially VScript since its a new adition for modders.
 
 ## Quick Links
 
-- **[Building the Project](getting-started/building.md)**: Set up your environment and compile the source.
-- **[Debugging](getting-started/debugging.md)**: Learn how to use our symbol server and debug effectively.
-- **[VScript](game/vscript.md)**: Explore the scripting capabilities of the engine.
+- **[VScript](vscript/vscript.md)**: This is where you will learn how to get started with JBMod VScript and other things.
 
 ## Social & Community
 
@@ -14,8 +12,9 @@ JBMod is a classic sandbox mod for the Source Engine, now open-sourced and being
 - [Discord Server](https://www.jbmod.com/discord)
 - [Steam Page](https://store.steampowered.com/app/2158860/JBMod/)
 
-## Licensing
+## Credits
 
-This documentation repository is licensed under the Apache License 2.0.
+This Wiki is a fork of dev.jbmod.com, so all the credits for the page go to TEAM_JBMOD.
+Articles and others are written by Cayama0811.
 
-For information regarding the licensing of the **JBMod game source**, please refer to the `README` and `LICENSE` files in the [jbmod-src](https://github.com/jbmod/jbmod-src) repository.
+Thanks for reading.

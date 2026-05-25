@@ -1,4 +1,4 @@
-site_name: JBMod Documentation
+site_name: JBMod Developer Wiki
 site_url: https://krolot.github.io/JBDevWiki/
 repo_url: https://github.com/Krolot/JBDevWiki
 repo_name: Krolot/JBDevWiki
@@ -6,6 +6,8 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  logo: assets/icons/logo.png
+  favicon: assets/icons/favicon.png
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -46,11 +48,9 @@ markdown_extensions:
 
 nav:
   - Welcome: index.md
-  - Getting Started:
-      - Building: getting-started/building.md
-      - Debugging: getting-started/debugging.md
-  - Game Development:
-      - VScript: game/vscript.md
+  - VScript:
+      - VScript Main: vscript/vscript-main.md
+      - Basic VScript: vscript/vscript-learn.md
 
 extra_css:
   - stylesheets/extra.css
