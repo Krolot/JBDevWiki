@@ -1,0 +1,402 @@
+# VScript in JBMod
+In this guide we will cover:
+
+- Where to put the scripts: We will learn the folders and the naming of scripts.
+- How to use the console: What can you do with the console generally.
+- How to execute them in game: Using commands such as script_execute and others.
+- What are Functions, Callbacks and Bindings?
+- Fun scripts: What you have been waiting for.
+	
+## Before Starting
+
+!!! note "Prerequisite"
+
+    You must have JBMod installed via Steam on the **github** branch for these instructions to work correctly.
+
+If you don't know how to code in the VScript language, Squirrel, you can go back to **[this](vscript-learn.md)** article to learn the basics.
+
+## Scripts Folder
+
+The first thing we need to do is open Steam, click on JBMod and go to the right on the settings icon, click on it. Select **Properties** and then select **Installed Files** you will see a folder like this:
+
+[Image]
+
+Click on the one that says `jbmod` (all lowercase). Then click on the folder `scripts` if theres no scripts folder you create a new one and name it like that.
+
+Inside the `scripts` folder create a new folder called `vscripts`. Inside that folder create `gamemodes` and `weapons`
+
+### What is this?
+
+This is the main folder, here you will have something like this
+
+[Image]
+
+These are some things you can do with vscript: 
+
+- **[Gamemodes](vscript-main.md)** (article not ready)
+- **[Weapons](vscript-main.md)** (article not ready)
+- **Simple files** that can be executed through console
+
+We will be learning the latter.
+
+## Console
+
+This is the heart of JBMod modding. It is essential if you want to start making scripts. To enable it you first need to open JBMod, go to options, and on the Keybind section click in **"Advanced"**, then click on **"Enable Developer Console"**
+
+[Gif]
+
+Now you can open your console using the letter "`" on an English keyboard. If you dont have an english keyboard you can change the keybind for the console in the same section
+
+[Image]
+
+Once you open the console you might get a little overwhelmed about all the stuff on your screen, you can type stuff on the textbox below it.
+
+[Image]
+
+Try typing in the console this inside any map (it does not work in the main menu): 
+
+```squirrel
+script printl("Hello World!")
+```
+
+If the message appears in the console, congratulations, you have made your first line of code inside JBMod.
+
+!!! warning "Must know"
+
+    The `script` command is a simple way to execute code directly from the console. Everything written after `script` is treated as a single line of code. `script_execute`, on the other hand, executes an entire `.nut` file located inside the `vscripts` folder.
+	
+## How to execute scripts
+
+This is very simple, inside the folder `jbmod/scripts/vscripts/` we are going to create a new file, as you learned in the last article, Create a new file and rename its extension to ```.nut```. In this case we will do something like **`test.nut`**
+
+Inside the `test.nut` file, type the same example as before 
+
+```squirrel
+printl("Hello World!")
+```
+
+The last thing you need to do is to start a server, or just opening a map using the `map jb_buildingblocks` command.
+
+!!! note "Must know"
+
+    You dont have to close the game when you want to change your scripts, you only  have to use the command `script_execute test` every time you change your script. They can only be executed INSIDE a map, not in the main menu. 
+	
+Finally just use the command `script_execute test` and the message should appear in the console. Well done.
+
+## Entities/Handles
+
+Everything is an entity in JBMod, the player is an entity, the props on the map are entities. Even things like the world itself.
+
+A handle is a reference to an entity, its like a variable that points to it.
+
+```squirrel
+local player = GetPlayerByIndex(1);
+
+player.SetHealth(100);
+```
+
+So this script when it gets executed it tells the server that the FIRST player on the server should have the health to a hundred, in local servers usually the first player is the one that hosts it.
+
+You can see that we first define the local variable player, this variable uses the function `GetPlayerByIndex()` that searches for player through the server list, in this case we tell it to search for the first player. Once it founds the first player we tell it `player.SetHealth(100)` the dot means that we tell the script to access something from the entity, in this case its health and we tell it to set it to a hundred. You must do this for any entity you want to modify.  
+
+Theres a lot of ways to access entities that we will see later.
+
+!!! warning "Must Know"
+
+	A handle becomes invalid if the entity is removed or disconnected, if its invalid the code will have errors.
+
+## Entity Find
+
+In VScript, you cannot directly access a full list of entities. Instead, you must iterate through them one by one using search functions.
+
+The most common function is:
+
+```squirrel
+Entities.FindByClassname(startEntity, className);
+```
+
+This function will search for entities that match the classname, starting in the entity we tell it to. If you want it from the start use `null`
+
+```squirrel
+local ent = null;
+
+ent = Entities.FindByClassname(ent, "prop_physics*")
+
+printl(ent)
+```
+
+In this case it will look for the first prop_physics it finds and it will print it, soon we will see it with loops.
+
+## Functions
+
+As we have learned before, functions are blocks of code that are executed when explicitly called by the script or another system. A real JBMod example could be something like:
+```squirrel
+function HealPlayer(player)
+{
+    player.SetHealth(100);
+}
+
+HealPlayer(GetPlayerByIndex(1));
+```
+This simple function will set the first player health to a hundred.
+
+## Callbacks
+
+Callbacks are functions that are automatically called by the engine when a specific event occurs.
+The script does not call them directly.
+
+```squirrel
+function OnPlayerSpawn(player)
+{
+    ClientPrint(player, Constants.EHudNotify.HUD_PRINTTALK, "A player has Spawned")
+}
+```
+
+The function `OnPlayerSpawn` only gets executed when any player spawns, in this case it will print the message into chat. You DONT call the function, the function gets called by the engine.
+
+The function automatically knows what player spawned so you dont need to search them by index or any other way.
+
+## Bindings
+
+Bindings are the connection between the engine and your script. They define which function will be executed when an event happens.
+
+```squirrel
+RegisterScriptGameEventListener("player_say");
+
+function OnGameEvent_player_say(event)
+{
+    local msg = event.text.tolower();
+
+    if (msg == "!hello")
+    {
+        Say(null, "Hello!", false);
+    }
+}
+
+__CollectGameEventCallbacks(this);
+```
+As you can see here, we use the function `RegisterScriptGameEventListener()` to register the GameEvent `player_say`
+
+!!! warning "Must know"
+
+    We dont know yet all the game events on JBMod. This one was discovered through an experimental process.
+	
+Then we define a callback called `OnGameEvent_player_say()`, which is executed whenever the engine fires the player_say event. In this script, we check the message sent by the player, and if it matches `!hello`, the script responds in chat.
+
+Finally, we use `__CollectGameEventCallbacks();` This function scans the current script scope and automatically registers all functions that start with `OnGameEvent_` as listeners for game events and then binds them with engine events.
+
+This is one of the simplest ways to build chat-based command systems in JBMod.
+
+## Extras
+
+Yes, i know you might feel a little overwhelmed by this, not even me understands Bindings. So lets get into some simpler concepts to continue.
+
+### Client VS Server
+
+The client is your local game, it loads the graphics the UI, models and everything else you see while playing.
+
+The server makes the math, where the bullets go, where you are, makes sure that everything is connected between clients and that they dont desync.
+
+Something interesting is that some functions are exclusive to the server while others are exclusive to the client. Theres not only one `script_execute` command, theres also `script_execute_client` that only executes code on your client.
+
+You can also access the SERVER or the CLIENT inside a script.
+
+```squirrel
+if ( SERVER )
+{
+	printl("Hi, im the server")
+}
+if ( CLIENT )
+{
+	printl("Hi, im the client")
+}
+```
+try using the command `script_execute test`, if you see the server message you are accessing the server, then try `script_execute_client test` if you see the client message you are accessing the client.
+
+!!! note "Shared"
+
+	If you dont put any of those two, you are accesing the SHARED state, both client and server.
+	
+### Null Checks
+
+When something doesnt exist it becomes `null` and VScript doesnt like when something doesnt exist, so you must do checks.
+
+```squirrel
+local player = GetPlayerByIndex(2);
+
+printl(player.GetHealth());
+```
+
+this code looks for the SECOND player in the server, since theres no second player it leaves an error on console.
+
+```squirrel
+AN ERROR HAS OCCURRED [the index 'GetHealth' does not exist]
+
+CALLSTACK
+*FUNCTION [main()] test.nut line [3]
+
+LOCALS
+[player] NULL
+[vargv] ARRAY
+[this] TABLE
+Error running script named test
+```
+
+Something like this should appear on console, when it says that the index `GetHealth` doesnt exist, its because theres no entity with it.
+
+Try using the same script but put this command on console `jbmod_bot_add` in this case it actually prints the health of the second player, the bot.
+
+The script shouldnt have errors even if the second player is desconected so we are going to make a null check
+
+```squirrel
+local player = GetPlayerByIndex(2);
+
+if (!player)
+	return
+
+printl(player.GetHealth());
+```
+
+In this case we use the return feature with an if statement, `if (!player)` it means that if the player doesnt exist, stop the function, if you try using this in a game with no second player you shouldnt recieve any errors.
+
+This is necessary so your scripts dont break mid-game.
+
+### Debugging
+
+You can use the `printl()` to print stuff to console and debug if it works, as we already learned, by just using printl you can see which parts of the code get executed at what moment, it helps to understand logic errors.
+
+### Includes
+
+You can include other `.nut` files inside the one you are making by simply using the function `IncludeScript()`
+
+```squirrel
+// this is the main file located inside the vscripts folder inside a custom folder called "myscripts"
+// this file is called SayHi.nut
+
+hello <- "hi";
+
+function SayHi()
+{
+	printl(hello);
+}
+```
+
+This is the file that we are going to include.
+
+```squirrel
+IncludeScript("myscripts/SayHi.nut");
+
+hello = "bye"
+
+SayHi();
+```
+
+This is the file that executes the included code, as you can see, when we include a script we can access its functions and variables, in this case we modified the variable so instead of saying hi it says goodbye.
+
+!!! warning "Must Know"
+
+	You cant use local variables from other scripts, it only works with global variables.
+	
+### Loops
+
+You can do some flashy stuff with loops, specially finding all entities of something:
+
+```squirrel
+local ent = null;
+
+while ((ent = Entities.FindByClassname(ent, "prop_physics")) != null)
+{
+    ent.Destroy()
+}
+```
+
+This is a cleanup script, as we learned before it looks for all entities named of the class `prop_physics` using the function `Entities.FindByClassname` until it finds them all and it destroys them.
+
+```squirrel
+local ent = null;
+
+while ((ent = Entities.FindByClassname(ent, "prop_*")) != null)
+{
+    printl(ent)
+}
+```
+You can also use `*` to search for all the stuff after what you written, even you can put the `*` by itself and it will search for EVERY entity.
+
+```squirrel
+for (local i = 1; i <= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+    printl(player.GetPlayerName());
+	printl(player);
+}
+```
+
+You could use the same method from the last example but this one is more customizable, in this case it checks for all players using a for loop that stops at the maxplayers number using the function `MaxClients()`, so if you have 32 it will do it 32 times.
+
+It prints the players name and its index.
+
+## EntFire
+
+Every entity has inputs, and EntFire can trigger these inputs, it works as a command but also as a function
+
+```squirrel
+EntFire(targetName, action, value, delay, activator);
+```
+
+The target is what we want to change, the action is what we are changing, the value is what changes, the delay its self explanatory (in seconds), and the activator is who triggers it.
+
+```squirrel
+local ent = null;
+
+EntFire("prop_physics*", "DisableMotion", "", 0, null);
+```
+
+This will freeze every prop_physics on the server, this is what the physgun does to the prop you are holding when you right click, so if you grab them with it they unfreeze.
+
+This version of entfire is specially good for map making, because it uses a targetname we can tell it to do specific stuff to an entity with a specific name:
+
+```squirrel
+EntFire("door_main", "Open", "", 0);
+```
+
+This triggers the input "Open" to any entity called "door_main".
+
+```squirrel
+EntFireByHandle(handle, string, string, float, handle, handle)
+```
+
+Instead of using the name of the entity we are looking for, we use a handle. Its more precise and flexible.
+
+```squirrel
+local player = null;
+
+while ((player = Entities.FindByClassname(player, "player")) != null)
+{
+    EntFireByHandle(player, "Color", "255 128 0", 0, null, null);
+}
+```
+
+This changes every player color to JBMod Orange.
+
+As you can see we use the handle instead of the name, this works better with functions like `OnPlayerSpawn(player)` because player is a handle and not a string.
+
+## NetProps
+
+Work in Progress.
+
+## Fun Scripts
+
+Work in Progress.
+
+## Challenges
+
+Work in progress.
+
+## Whats next?
+
+We will learn how to make gamemodes/weapons with all the stuff we learned through this article, we will learn special functions/callbacks from gamemodes/weapons and we will learn how to use vscript for mapping.
+

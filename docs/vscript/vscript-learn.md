@@ -1,4 +1,7 @@
 # How to use Squirrel
+!!! warning "Must Know"
+	
+	If you are COMPLETELY new to programing i dont recommend using this as your only way of learning, you should see tutorials made by professionals, im just a guy that codes once in a while.
 
 The squirrel language uses .nut files, to create a .nut file you just simply right click on wherever you want you file in, click on create text file and rename it to yourname.nut, then you can use any text editor you like to modify it, notepad, notepad++, vscode and others.
 
@@ -154,6 +157,76 @@ else {
 ```
 This is almost the same as the two last examples, unlike those, in this one the else if works as a second condition. If x equals 10 then print "ten", if x doesnt equal ten, but it equals 20 then print "twenty", if both conditions arent met then print "other".
 
+
+## Loops
+
+Sometimes you should avoid using loops while scripting for the game, because they can freeze the server if used incorrectly. But they can still be useful for simple tasks.
+
+### While
+
+A while loop repeats code while a condition is true.
+
+```squirrel
+local x = 0;
+
+while (x < 5)
+{
+    printl(x);
+    x = x + 1;
+}
+```
+
+This script starts with x equal to 0, then the loop checks if x is less than five. If the condition is true it will print the value of x until it reaches five. It adds one each loop.
+
+The console should print something like:
+
+```squirrel
+0
+1
+2
+3
+4
+```
+
+Once it becomes something more than four it no longer prints because the loop stopped.
+
+!!! warning "Must Know"
+
+	If the condition never becomes false, the loop will never stop and the game can freeze.
+
+Example of a dangerous infinite loop:
+
+```squirrel
+while (true)
+{
+    printl("help");
+}
+```
+
+This loop never ends because true is ALWAYS true.
+
+### For
+
+A for loop is similar to a while loop, but everything is packed into a line, and it gives you more control.
+
+```squirrel
+for (local i = 0; i < 5; i++)
+{
+    printl(i);
+}
+```
+
+This does the exact same thing as the previous loop.
+
+A for loop has three different components:
+
+```squirrel
+for (local i = 0; i < 5; i++)
+```
+
+In this case we first create a variable `local i = 0` and we initialize it at 0, then we put a semicolon and add the condition that i should be less than five, finally after another semicolon we do `i++` it is a shorter way of making `i = i + 1` that increments i by one.
+
+
 ## "=" VS "=="
 
 You might think that "=" and "==" are the same thing, but thats not true.
@@ -233,6 +306,32 @@ if (x == 10 || y == 20)
 ```
 This will print only if either x equals 10 or y equals 20.
 
+### NOT
+
+NOT is used to negate a value. It converts a condition into its opposite. It uses the logical operator `!`.
+
+```squirrel
+if (!x)
+{
+    print("x is false or doesnt exist");
+}
+```
+
+This means the condition is true when x is null, false, or otherwise evaluates as false.
+
+### NOT EQUAL
+
+It checks if something isnt equal to something, it uses the logical operator `!=`.
+
+```squirrel
+if (x != 10)
+{
+    print("x is not 10");
+}
+```
+
+if x is anything but ten it will print that x is not ten.
+
 ### Comparison
 
 These are very simple, these check if something is more or less than something else.
@@ -284,10 +383,6 @@ if (x == null)
 }
 ```
 
-## While/For
-
-In JBMod VScript, While and For loops should generally be avoided. They can easily freeze the server, break gameplay and cause severe performance issues if used incorrectly.
-JBMod provides safer alternatives for repeating code, which will be covered in the next page.
 ## Extras
 
 ### What is print?

@@ -51,6 +51,7 @@ nav:
   - VScript:
       - VScript Main: vscript/vscript-main.md
       - Basic VScript: vscript/vscript-learn.md
+      - VScript on JBMod: vscript/vscript-jbmod.md
 
 extra_css:
   - stylesheets/extra.css

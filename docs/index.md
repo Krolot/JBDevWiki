@@ -4,7 +4,7 @@ Not to be confused with docs.jbmod.dev this Wiki was created with the purpose of
 
 ## Quick Links
 
-- **[VScript](vscript/vscript.md)**: This is where you will learn how to get started with JBMod VScript and other things.
+- **[VScript](vscript/vscript-main.md)**: This is where you will learn how to get started with JBMod VScript and other things.
 
 ## Social & Community
 
