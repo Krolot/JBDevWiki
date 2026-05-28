@@ -2,10 +2,10 @@ site_name: JBMod Developer Wiki
 site_url: https://krolot.github.io/JBDevWiki/
 repo_url: https://github.com/Krolot/JBDevWiki
 repo_name: Krolot/JBDevWiki
-edit_uri: edit/main/docs/
 
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/icons/logo.png
   favicon: assets/icons/favicon.png
   palette:
@@ -24,6 +24,7 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
   features:
     - navigation.tabs
     - navigation.sections
@@ -55,3 +56,11 @@ nav:
 
 extra_css:
   - stylesheets/extra.css
+
+extra:
+  generator: false
+
+extra_javascript: []
+
+extra_templates:
+  - overrides
