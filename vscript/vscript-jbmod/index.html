@@ -1,0 +1,1389 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://krolot.github.io/JBDevWiki/vscript/vscript-jbmod/">
+      
+      
+        <link rel="prev" href="../vscript-learn/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/icons/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>VScript on JBMod - JBMod Developer Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vscript-in-jbmod" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="JBMod Developer Wiki" class="md-header__button md-logo" aria-label="JBMod Developer Wiki" data-md-component="logo">
+      
+  <img src="../../assets/icons/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            JBMod Developer Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VScript on JBMod
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Krolot/JBDevWiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Krolot/JBDevWiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../vscript-main/" class="md-tabs__link">
+          
+  
+  
+  VScript
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="JBMod Developer Wiki" class="md-nav__button md-logo" aria-label="JBMod Developer Wiki" data-md-component="logo">
+      
+  <img src="../../assets/icons/logo.png" alt="logo">
+
+    </a>
+    JBMod Developer Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Krolot/JBDevWiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Krolot/JBDevWiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VScript
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VScript
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vscript-main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VScript Main
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vscript-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic VScript
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VScript on JBMod
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VScript on JBMod
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before Starting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts Folder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripts Folder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is this?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-execute-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to execute scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entitieshandles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entities/Handles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-find" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entity Find
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callbacks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extras
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-vs-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client VS Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#null-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Null Checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Includes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entfire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EntFire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netprops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NetProps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fun-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fun Scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Challenges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whats next?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before Starting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts Folder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripts Folder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is this?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-execute-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to execute scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entitieshandles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entities/Handles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-find" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entity Find
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callbacks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extras
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-vs-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client VS Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#null-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Null Checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Includes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entfire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EntFire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netprops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NetProps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fun-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fun Scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Challenges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whats next?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="vscript-in-jbmod">VScript in JBMod<a class="headerlink" href="#vscript-in-jbmod" title="Permanent link">&para;</a></h1>
+<p>In this guide we will cover:</p>
+<ul>
+<li>Where to put the scripts: We will learn the folders and the naming of scripts.</li>
+<li>How to use the console: What can you do with the console generally.</li>
+<li>How to execute them in game: Using commands such as script_execute and others.</li>
+<li>What are Functions, Callbacks and Bindings?</li>
+<li>Fun scripts: What you have been waiting for.</li>
+</ul>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Prerequisite</p>
+<p>You must have JBMod installed via Steam on the <strong>github</strong> branch for these instructions to work correctly.</p>
+</div>
+<p>If you don't know how to code in the VScript language, Squirrel, you can go back to <strong><a href="../vscript-learn/">this</a></strong> article to learn the basics.</p>
+<h2 id="scripts-folder">Scripts Folder<a class="headerlink" href="#scripts-folder" title="Permanent link">&para;</a></h2>
+<p>The first thing we need to do is open Steam, click on JBMod and go to the right on the settings icon, click on it. Select <strong>Properties</strong> and then select <strong>Installed Files</strong> you will see a folder like this:</p>
+<p>[Image]</p>
+<p>Click on the one that says <code>jbmod</code> (all lowercase). Then click on the folder <code>scripts</code> if theres no scripts folder you create a new one and name it like that.</p>
+<p>Inside the <code>scripts</code> folder create a new folder called <code>vscripts</code>. Inside that folder create <code>gamemodes</code> and <code>weapons</code></p>
+<h3 id="what-is-this">What is this?<a class="headerlink" href="#what-is-this" title="Permanent link">&para;</a></h3>
+<p>This is the main folder, here you will have something like this</p>
+<p>[Image]</p>
+<p>These are some things you can do with vscript: </p>
+<ul>
+<li><strong><a href="../vscript-main/">Gamemodes</a></strong> (article not ready)</li>
+<li><strong><a href="../vscript-main/">Weapons</a></strong> (article not ready)</li>
+<li><strong>Simple files</strong> that can be executed through console</li>
+</ul>
+<p>We will be learning the latter.</p>
+<h2 id="console">Console<a class="headerlink" href="#console" title="Permanent link">&para;</a></h2>
+<p>This is the heart of JBMod modding. It is essential if you want to start making scripts. To enable it you first need to open JBMod, go to options, and on the Keybind section click in <strong>"Advanced"</strong>, then click on <strong>"Enable Developer Console"</strong></p>
+<p>[Gif]</p>
+<p>Now you can open your console using the letter "`" on an English keyboard. If you dont have an english keyboard you can change the keybind for the console in the same section</p>
+<p>[Image]</p>
+<p>Once you open the console you might get a little overwhelmed about all the stuff on your screen, you can type stuff on the textbox below it.</p>
+<p>[Image]</p>
+<p>Try typing in the console this inside any map (it does not work in the main menu): </p>
+<div class="highlight"><pre><span></span><code>script printl(&quot;Hello World!&quot;)
+</code></pre></div>
+<p>If the message appears in the console, congratulations, you have made your first line of code inside JBMod.</p>
+<div class="admonition warning">
+<p class="admonition-title">Must know</p>
+<p>The <code>script</code> command is a simple way to execute code directly from the console. Everything written after <code>script</code> is treated as a single line of code. <code>script_execute</code>, on the other hand, executes an entire <code>.nut</code> file located inside the <code>vscripts</code> folder.</p>
+</div>
+<h2 id="how-to-execute-scripts">How to execute scripts<a class="headerlink" href="#how-to-execute-scripts" title="Permanent link">&para;</a></h2>
+<p>This is very simple, inside the folder <code>jbmod/scripts/vscripts/</code> we are going to create a new file, as you learned in the last article, Create a new file and rename its extension to <code>.nut</code>. In this case we will do something like <strong><code>test.nut</code></strong></p>
+<p>Inside the <code>test.nut</code> file, type the same example as before </p>
+<div class="highlight"><pre><span></span><code>printl(&quot;Hello World!&quot;)
+</code></pre></div>
+<p>The last thing you need to do is to start a server, or just opening a map using the <code>map jb_buildingblocks</code> command.</p>
+<div class="admonition note">
+<p class="admonition-title">Must know</p>
+<p>You dont have to close the game when you want to change your scripts, you only  have to use the command <code>script_execute test</code> every time you change your script. They can only be executed INSIDE a map, not in the main menu. </p>
+</div>
+<p>Finally just use the command <code>script_execute test</code> and the message should appear in the console. Well done.</p>
+<h2 id="entitieshandles">Entities/Handles<a class="headerlink" href="#entitieshandles" title="Permanent link">&para;</a></h2>
+<p>Everything is an entity in JBMod, the player is an entity, the props on the map are entities. Even things like the world itself.</p>
+<p>A handle is a reference to an entity, its like a variable that points to it.</p>
+<div class="highlight"><pre><span></span><code>local player = GetPlayerByIndex(1);
+
+player.SetHealth(100);
+</code></pre></div>
+<p>So this script when it gets executed it tells the server that the FIRST player on the server should have the health to a hundred, in local servers usually the first player is the one that hosts it.</p>
+<p>You can see that we first define the local variable player, this variable uses the function <code>GetPlayerByIndex()</code> that searches for player through the server list, in this case we tell it to search for the first player. Once it founds the first player we tell it <code>player.SetHealth(100)</code> the dot means that we tell the script to access something from the entity, in this case its health and we tell it to set it to a hundred. You must do this for any entity you want to modify.  </p>
+<p>Theres a lot of ways to access entities that we will see later.</p>
+<div class="admonition warning">
+<p class="admonition-title">Must Know</p>
+<p>A handle becomes invalid if the entity is removed or disconnected, if its invalid the code will have errors.</p>
+</div>
+<h2 id="entity-find">Entity Find<a class="headerlink" href="#entity-find" title="Permanent link">&para;</a></h2>
+<p>In VScript, you cannot directly access a full list of entities. Instead, you must iterate through them one by one using search functions.</p>
+<p>The most common function is:</p>
+<div class="highlight"><pre><span></span><code>Entities.FindByClassname(startEntity, className);
+</code></pre></div>
+<p>This function will search for entities that match the classname, starting in the entity we tell it to. If you want it from the start use <code>null</code></p>
+<div class="highlight"><pre><span></span><code>local ent = null;
+
+ent = Entities.FindByClassname(ent, &quot;prop_physics*&quot;)
+
+printl(ent)
+</code></pre></div>
+<p>In this case it will look for the first prop_physics it finds and it will print it, soon we will see it with loops.</p>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<p>As we have learned before, functions are blocks of code that are executed when explicitly called by the script or another system. A real JBMod example could be something like:
+<div class="highlight"><pre><span></span><code>function HealPlayer(player)
+{
+    player.SetHealth(100);
+}
+
+HealPlayer(GetPlayerByIndex(1));
+</code></pre></div>
+This simple function will set the first player health to a hundred.</p>
+<h2 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h2>
+<p>Callbacks are functions that are automatically called by the engine when a specific event occurs.
+The script does not call them directly.</p>
+<div class="highlight"><pre><span></span><code>function OnPlayerSpawn(player)
+{
+    ClientPrint(player, Constants.EHudNotify.HUD_PRINTTALK, &quot;A player has Spawned&quot;)
+}
+</code></pre></div>
+<p>The function <code>OnPlayerSpawn</code> only gets executed when any player spawns, in this case it will print the message into chat. You DONT call the function, the function gets called by the engine.</p>
+<p>The function automatically knows what player spawned so you dont need to search them by index or any other way.</p>
+<h2 id="bindings">Bindings<a class="headerlink" href="#bindings" title="Permanent link">&para;</a></h2>
+<p>Bindings are the connection between the engine and your script. They define which function will be executed when an event happens.</p>
+<p><div class="highlight"><pre><span></span><code>RegisterScriptGameEventListener(&quot;player_say&quot;);
+
+function OnGameEvent_player_say(event)
+{
+    local msg = event.text.tolower();
+
+    if (msg == &quot;!hello&quot;)
+    {
+        Say(null, &quot;Hello!&quot;, false);
+    }
+}
+
+__CollectGameEventCallbacks(this);
+</code></pre></div>
+As you can see here, we use the function <code>RegisterScriptGameEventListener()</code> to register the GameEvent <code>player_say</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Must know</p>
+<p>We dont know yet all the game events on JBMod. This one was discovered through an experimental process.</p>
+</div>
+<p>Then we define a callback called <code>OnGameEvent_player_say()</code>, which is executed whenever the engine fires the player_say event. In this script, we check the message sent by the player, and if it matches <code>!hello</code>, the script responds in chat.</p>
+<p>Finally, we use <code>__CollectGameEventCallbacks();</code> This function scans the current script scope and automatically registers all functions that start with <code>OnGameEvent_</code> as listeners for game events and then binds them with engine events.</p>
+<p>This is one of the simplest ways to build chat-based command systems in JBMod.</p>
+<h2 id="extras">Extras<a class="headerlink" href="#extras" title="Permanent link">&para;</a></h2>
+<p>Yes, i know you might feel a little overwhelmed by this, not even me understands Bindings. So lets get into some simpler concepts to continue.</p>
+<h3 id="client-vs-server">Client VS Server<a class="headerlink" href="#client-vs-server" title="Permanent link">&para;</a></h3>
+<p>The client is your local game, it loads the graphics the UI, models and everything else you see while playing.</p>
+<p>The server makes the math, where the bullets go, where you are, makes sure that everything is connected between clients and that they dont desync.</p>
+<p>Something interesting is that some functions are exclusive to the server while others are exclusive to the client. Theres not only one <code>script_execute</code> command, theres also <code>script_execute_client</code> that only executes code on your client.</p>
+<p>You can also access the SERVER or the CLIENT inside a script.</p>
+<p><div class="highlight"><pre><span></span><code>if ( SERVER )
+{
+    printl(&quot;Hi, im the server&quot;)
+}
+if ( CLIENT )
+{
+    printl(&quot;Hi, im the client&quot;)
+}
+</code></pre></div>
+try using the command <code>script_execute test</code>, if you see the server message you are accessing the server, then try <code>script_execute_client test</code> if you see the client message you are accessing the client.</p>
+<div class="admonition note">
+<p class="admonition-title">Shared</p>
+<p>If you dont put any of those two, you are accesing the SHARED state, both client and server.</p>
+</div>
+<h3 id="null-checks">Null Checks<a class="headerlink" href="#null-checks" title="Permanent link">&para;</a></h3>
+<p>When something doesnt exist it becomes <code>null</code> and VScript doesnt like when something doesnt exist, so you must do checks.</p>
+<div class="highlight"><pre><span></span><code>local player = GetPlayerByIndex(2);
+
+printl(player.GetHealth());
+</code></pre></div>
+<p>this code looks for the SECOND player in the server, since theres no second player it leaves an error on console.</p>
+<div class="highlight"><pre><span></span><code>AN ERROR HAS OCCURRED [the index &#39;GetHealth&#39; does not exist]
+
+CALLSTACK
+*FUNCTION [main()] test.nut line [3]
+
+LOCALS
+[player] NULL
+[vargv] ARRAY
+[this] TABLE
+Error running script named test
+</code></pre></div>
+<p>Something like this should appear on console, when it says that the index <code>GetHealth</code> doesnt exist, its because theres no entity with it.</p>
+<p>Try using the same script but put this command on console <code>jbmod_bot_add</code> in this case it actually prints the health of the second player, the bot.</p>
+<p>The script shouldnt have errors even if the second player is desconected so we are going to make a null check</p>
+<div class="highlight"><pre><span></span><code>local player = GetPlayerByIndex(2);
+
+if (!player)
+    return
+
+printl(player.GetHealth());
+</code></pre></div>
+<p>In this case we use the return feature with an if statement, <code>if (!player)</code> it means that if the player doesnt exist, stop the function, if you try using this in a game with no second player you shouldnt recieve any errors.</p>
+<p>This is necessary so your scripts dont break mid-game.</p>
+<h3 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h3>
+<p>You can use the <code>printl()</code> to print stuff to console and debug if it works, as we already learned, by just using printl you can see which parts of the code get executed at what moment, it helps to understand logic errors.</p>
+<h3 id="includes">Includes<a class="headerlink" href="#includes" title="Permanent link">&para;</a></h3>
+<p>You can include other <code>.nut</code> files inside the one you are making by simply using the function <code>IncludeScript()</code></p>
+<div class="highlight"><pre><span></span><code>// this is the main file located inside the vscripts folder inside a custom folder called &quot;myscripts&quot;
+// this file is called SayHi.nut
+
+hello &lt;- &quot;hi&quot;;
+
+function SayHi()
+{
+    printl(hello);
+}
+</code></pre></div>
+<p>This is the file that we are going to include.</p>
+<div class="highlight"><pre><span></span><code>IncludeScript(&quot;myscripts/SayHi.nut&quot;);
+
+hello = &quot;bye&quot;
+
+SayHi();
+</code></pre></div>
+<p>This is the file that executes the included code, as you can see, when we include a script we can access its functions and variables, in this case we modified the variable so instead of saying hi it says goodbye.</p>
+<div class="admonition warning">
+<p class="admonition-title">Must Know</p>
+<p>You cant use local variables from other scripts, it only works with global variables.</p>
+</div>
+<h3 id="loops">Loops<a class="headerlink" href="#loops" title="Permanent link">&para;</a></h3>
+<p>You can do some flashy stuff with loops, specially finding all entities of something:</p>
+<div class="highlight"><pre><span></span><code>local ent = null;
+
+while ((ent = Entities.FindByClassname(ent, &quot;prop_physics&quot;)) != null)
+{
+    ent.Destroy()
+}
+</code></pre></div>
+<p>This is a cleanup script, as we learned before it looks for all entities named of the class <code>prop_physics</code> using the function <code>Entities.FindByClassname</code> until it finds them all and it destroys them.</p>
+<p><div class="highlight"><pre><span></span><code>local ent = null;
+
+while ((ent = Entities.FindByClassname(ent, &quot;prop_*&quot;)) != null)
+{
+    printl(ent)
+}
+</code></pre></div>
+You can also use <code>*</code> to search for all the stuff after what you written, even you can put the <code>*</code> by itself and it will search for EVERY entity.</p>
+<div class="highlight"><pre><span></span><code>for (local i = 1; i &lt;= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+    printl(player.GetPlayerName());
+    printl(player);
+}
+</code></pre></div>
+<p>You could use the same method from the last example but this one is more customizable, in this case it checks for all players using a for loop that stops at the maxplayers number using the function <code>MaxClients()</code>, so if you have 32 it will do it 32 times.</p>
+<p>It prints the players name and its index.</p>
+<h2 id="entfire">EntFire<a class="headerlink" href="#entfire" title="Permanent link">&para;</a></h2>
+<p>Every entity has inputs, and EntFire can trigger these inputs, it works as a command but also as a function</p>
+<div class="highlight"><pre><span></span><code>EntFire(targetName, action, value, delay, activator);
+</code></pre></div>
+<p>The target is what we want to change, the action is what we are changing, the value is what changes, the delay its self explanatory (in seconds), and the activator is who triggers it.</p>
+<div class="highlight"><pre><span></span><code>local ent = null;
+
+EntFire(&quot;prop_physics*&quot;, &quot;DisableMotion&quot;, &quot;&quot;, 0, null);
+</code></pre></div>
+<p>This will freeze every prop_physics on the server, this is what the physgun does to the prop you are holding when you right click, so if you grab them with it they unfreeze.</p>
+<p>This version of entfire is specially good for map making, because it uses a targetname we can tell it to do specific stuff to an entity with a specific name:</p>
+<div class="highlight"><pre><span></span><code>EntFire(&quot;door_main&quot;, &quot;Open&quot;, &quot;&quot;, 0);
+</code></pre></div>
+<p>This triggers the input "Open" to any entity called "door_main".</p>
+<div class="highlight"><pre><span></span><code>EntFireByHandle(handle, string, string, float, handle, handle)
+</code></pre></div>
+<p>Instead of using the name of the entity we are looking for, we use a handle. Its more precise and flexible.</p>
+<div class="highlight"><pre><span></span><code>local player = null;
+
+while ((player = Entities.FindByClassname(player, &quot;player&quot;)) != null)
+{
+    EntFireByHandle(player, &quot;Color&quot;, &quot;255 128 0&quot;, 0, null, null);
+}
+</code></pre></div>
+<p>This changes every player color to JBMod Orange.</p>
+<p>As you can see we use the handle instead of the name, this works better with functions like <code>OnPlayerSpawn(player)</code> because player is a handle and not a string.</p>
+<h2 id="netprops">NetProps<a class="headerlink" href="#netprops" title="Permanent link">&para;</a></h2>
+<p>Work in Progress.</p>
+<h2 id="fun-scripts">Fun Scripts<a class="headerlink" href="#fun-scripts" title="Permanent link">&para;</a></h2>
+<p>Work in Progress.</p>
+<h2 id="challenges">Challenges<a class="headerlink" href="#challenges" title="Permanent link">&para;</a></h2>
+<p>Work in progress.</p>
+<h2 id="whats-next">Whats next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>We will learn how to make gamemodes/weapons with all the stuff we learned through this article, we will learn special functions/callbacks from gamemodes/weapons and we will learn how to use vscript for mapping.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

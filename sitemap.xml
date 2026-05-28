@@ -2,14 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://krolot.github.io/JBDevWiki/</loc>
-         <lastmod>2026-05-25</lastmod>
+         <lastmod>2026-05-28</lastmod>
+    </url>
+    <url>
+         <loc>https://krolot.github.io/JBDevWiki/vscript/vscript-gamemodes/</loc>
+         <lastmod>2026-05-28</lastmod>
+    </url>
+    <url>
+         <loc>https://krolot.github.io/JBDevWiki/vscript/vscript-jbmod/</loc>
+         <lastmod>2026-05-28</lastmod>
     </url>
     <url>
          <loc>https://krolot.github.io/JBDevWiki/vscript/vscript-learn/</loc>
-         <lastmod>2026-05-25</lastmod>
+         <lastmod>2026-05-28</lastmod>
     </url>
     <url>
          <loc>https://krolot.github.io/JBDevWiki/vscript/vscript-main/</loc>
-         <lastmod>2026-05-25</lastmod>
+         <lastmod>2026-05-28</lastmod>
+    </url>
+    <url>
+         <loc>https://krolot.github.io/JBDevWiki/vscript/vscript-weapons/</loc>
+         <lastmod>2026-05-28</lastmod>
     </url>
 </urlset>
