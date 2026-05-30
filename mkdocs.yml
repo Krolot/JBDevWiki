@@ -48,7 +48,9 @@ markdown_extensions:
       permalink: true
 
 nav:
-  - Welcome: index.md
+  - Welcome: 
+    - Main Page: index.md
+    - GitHub Branch: welcome/github-branch.md
   - VScript:
       - VScript Main: vscript/vscript-main.md
       - Basic VScript: vscript/vscript-learn.md
