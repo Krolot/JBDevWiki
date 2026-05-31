@@ -868,6 +868,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foreach
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extras" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1293,6 +1326,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foreach
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extras" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1627,6 +1693,96 @@ The first one is for addition, the second is for subtraction, the third one is f
     print(&quot;x doesnt have a value&quot;);
 }
 </code></pre></div>
+<h2 id="arrays">Arrays<a class="headerlink" href="#arrays" title="Permanent link">&para;</a></h2>
+<p>An array is a list where every object has an index, and they always start at zero.</p>
+<div class="highlight"><pre><span></span><code>local letters = [
+    &quot;a&quot;,
+    &quot;b&quot;,
+    &quot;c&quot;
+];
+
+printl(letters[0]);
+printl(letters[1]);
+printl(letters[2]);
+</code></pre></div>
+<p>This code is very simple, in this case we create an array called letters, that has "a", "b" and "c" inside of it.</p>
+<p>Then we print the letter using this syntax <code>printl(letters[index])</code> in this case it will print something like</p>
+<div class="highlight"><pre><span></span><code>a
+b
+c
+</code></pre></div>
+<p>You can also add elements through the script using:</p>
+<div class="highlight"><pre><span></span><code>letters.append(&quot;d&quot;);
+</code></pre></div>
+<p>That will add d to the array, it always adds as the last index, so in THIS case it will be <code>letters[3]</code></p>
+<div class="highlight"><pre><span></span><code>letters.remove(1);
+</code></pre></div>
+<p>We can also remove elements from the array, in this case it removes "b" because it has index 1. And then c becomes index 1.</p>
+<h2 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h2>
+<p>Instead of using an index, it uses keys, works as a dictionary of values.</p>
+<div class="highlight"><pre><span></span><code>local wordData =
+{
+    word = &quot;Hello123&quot;,
+    letters = &quot;Hello&quot;,
+    numbers = &quot;123&quot;
+};
+
+printl(wordData.word);
+printl(wordData.letters);
+printl(wordData[&quot;numbers&quot;]);
+</code></pre></div>
+<p>In this case we are creating a new table called <code>wordData</code> that has a few keys, <code>word</code>, <code>letters</code> and <code>numbers</code> and then we print them using the syntax <code>printl(table.key)</code> thats the first way of accessing them, you can also do it like this <code>printl(table["key"])</code> both ways work the same.</p>
+<h2 id="foreach">Foreach<a class="headerlink" href="#foreach" title="Permanent link">&para;</a></h2>
+<p>This is where it gets good, when you want to check everything on a table/array most of the time the most optimal way of doing it is with a foreach, instead of a normal loop.</p>
+<div class="highlight"><pre><span></span><code>local letters = [
+    &quot;a&quot;,
+    &quot;b&quot;,
+    &quot;c&quot;
+];
+
+foreach (letter in letters)
+{
+    printl(letter)
+}
+</code></pre></div>
+<p>The foreach does two things at once, first it creates a temporal variable, in this case called "letter" and it will be used for anything inside the foreach, "letter" is asigned to every value inside "letters" so "a" is "letter".</p>
+<div class="highlight"><pre><span></span><code>foreach (tempVariable in array/table)
+{
+    printl(tempVariable);
+}
+</code></pre></div>
+<p>If you put name "tempVariable" something like banana it will still work, but you must get right the name of the array/table.</p>
+<div class="highlight"><pre><span></span><code>local wordData =
+{
+    word = &quot;Hello123&quot;,
+    letters = &quot;Hello&quot;,
+    numbers = &quot;123&quot;
+};
+
+foreach (value in wordData)
+{
+    printl(value);
+}
+</code></pre></div>
+<p>This example is almost the same as the one before, in this case we made a table.</p>
+<div class="admonition warning">
+<p class="admonition-title">Must know</p>
+<p>The values wont come in the original order you chose, tables dont work by order.</p>
+</div>
+<p>The interesting part about using foreach with tables is that you can get the keys.</p>
+<div class="highlight"><pre><span></span><code>local wordData =
+{
+    word = &quot;Hello123&quot;,
+    letters = &quot;Hello&quot;,
+    numbers = &quot;123&quot;
+};
+
+foreach (key, value in wordData)
+{
+    printl(key + &quot; = &quot; + value);
+}
+</code></pre></div>
+<p>In this case it will print something like <code>word = Hello123</code> this is specially useful when you want to know which value is which.</p>
 <h2 id="extras">Extras<a class="headerlink" href="#extras" title="Permanent link">&para;</a></h2>
 <h3 id="what-is-print">What is print?<a class="headerlink" href="#what-is-print" title="Permanent link">&para;</a></h3>
 <p>If you are not sure what print means its very simple, when you want to test if something works you can use the print() function, this function reads from whatever you add to it and puts it into console.

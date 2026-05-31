@@ -807,6 +807,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="NetProps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types-of-netprops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types of NetProps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tables
+      
+    </span>
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1088,6 +1116,34 @@
     <span class="md-ellipsis">
       
         NetProps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NetProps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types-of-netprops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types of NetProps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tables
       
     </span>
   </a>
@@ -1409,9 +1465,188 @@ while ((player = Entities.FindByClassname(player, &quot;player&quot;)) != null)
 <p>This changes every player color to JBMod Orange.</p>
 <p>As you can see we use the handle instead of the name, this works better with functions like <code>OnPlayerSpawn(player)</code> because player is a handle and not a string.</p>
 <h2 id="netprops">NetProps<a class="headerlink" href="#netprops" title="Permanent link">&para;</a></h2>
-<p>Work in Progress.</p>
+<p>NetProps (known as Networked Properties) are the internal variables of an entity. Some of them have a public function, while others dont.</p>
+<p>A player can have health, armor, speed, position, weapons, active weapon, render color and tons of other stuff, everything can be modified through NetProps</p>
+<div class="highlight"><pre><span></span><code>player.SetHealth(100);
+</code></pre></div>
+<p>This is the public function to set the health of a player.</p>
+<div class="highlight"><pre><span></span><code>NetProps.SetPropInt(player, &quot;m_iHealth&quot;, 100);
+</code></pre></div>
+<p>This is how you do it with NetProps, in this case we should always use the public function because is the secure way of doing, but. What happens when you dont have any function for whatever you want to do?</p>
+<div class="highlight"><pre><span></span><code>NetProps.GetPropString(player, &quot;m_szNetworkIDString&quot;)
+</code></pre></div>
+<p>right know there is NO function for getting a steam id, so this is the way of doing it.</p>
+<div class="highlight"><pre><span></span><code>for (local i = 1; i &lt;= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+    local SteamID = NetProps.GetPropString(player, &quot;m_szNetworkIDString&quot;)
+
+    if (SteamID == &quot;[U:1:1201533202]&quot;)
+        printl(&quot;The user is Cayama0811&quot;)
+    else if (SteamID == &quot;BOT&quot;)
+        printl(&quot;The user is a BOT&quot;)
+    else
+        printl(&quot;The user is not Cayama0811, nor a BOT.&quot;)
+
+    printl(SteamID)
+}
+</code></pre></div>
+<p>In this case this code checks all the players on the game (like a previous example) and then it gets the string (text) of the SteamID of all the players, if the SteamID equals to mine, yes my SteamID, the one from the guy who writes all this stuff, then it will print that is mine, if the string equals to "BOT" then it will print that the ID doesnt exist and its actually a BOT, and then every other player that isnt me or a bot will get a diferent print. At the end it prints the actual SteamID.</p>
+<div class="admonition warning">
+<p class="admonition-title">Must know</p>
+<p>m_szNetworkIDString only works with SteamID3, so the format should look something like this <code>[U:1:1201533202]</code>, you can visit <a href="https://steamid.io/">this</a> website to check your SteamID3.</p>
+</div>
+<p>You can try changing the SteamID3 and the name to check how it works.</p>
+<p>This is a very secure way of making player specific scripts, like admin commands and such.</p>
+<h3 id="types-of-netprops">Types of NetProps<a class="headerlink" href="#types-of-netprops" title="Permanent link">&para;</a></h3>
+<p>As you saw before we used <code>SetPropInt()</code> and <code>GetPropString()</code> but theres more than just that, we can get and set any value from the NetProps.</p>
+<div class="highlight"><pre><span></span><code>GetPropBool
+GetPropEntity
+GetPropFloat
+GetPropInfo
+GetPropInt
+GetPropString
+GetPropType
+GetPropVector
+
+HasProp
+
+SetPropBool
+SetPropEntity
+SetPropFloat
+SetPropInt
+SetPropString
+SetPropVector
+</code></pre></div>
+<p>With all of these functions you can Get/Set NetProps as you please, try experimenting with a few of them to check what you can do.</p>
+<h2 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h2>
+<p>As you saw in the vscript syntax guide we can also use tables.</p>
+<div class="highlight"><pre><span></span><code>for (local i = 1; i &lt;= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+    local playerData =
+    {
+        name = player.GetPlayerName(),
+        kills = player.GetFragCount(),
+        deaths = player.GetDeathCount(),
+        SteamID = NetProps.GetPropString(player, &quot;m_szNetworkIDString&quot;)
+    };
+
+    if (playerData.SteamID == &quot;BOT&quot;)
+        continue;
+
+    foreach (key, value in playerData)
+    {
+        printl(key + &quot; = &quot; + value);
+    }
+}
+</code></pre></div>
+<p>This is a simple example that checks for everyone in the game, it prints their name, how much kills theyve got, their death count and their SteamID, useful to get a lot of stats from any player quickly, it also skips bots altogheter.</p>
 <h2 id="fun-scripts">Fun Scripts<a class="headerlink" href="#fun-scripts" title="Permanent link">&para;</a></h2>
-<p>Work in Progress.</p>
+<p>This is what you all have been waiting for, the fun.</p>
+<div class="highlight"><pre><span></span><code>if (SERVER)
+{
+    printl(&quot;Scanning all players...&quot;);
+
+    local p = null;
+
+    while (p = Entities.FindByClassname(p, &quot;player&quot;))
+    {
+        if (!p.IsPlayer())
+            continue;
+
+        printl(&quot;Player found: &quot; + p.entindex());
+
+        p.TakeDamage( 100, 2, p )
+
+    }
+}
+</code></pre></div>
+<p>This simple script works as a global kill, it will kill any player that is alive.</p>
+<div class="highlight"><pre><span></span><code>RegisterScriptGameEventListener(&quot;player_say&quot;);
+
+function OnGameEvent_player_say(event)
+{
+    msg &lt;- event.text;
+    player &lt;- GetPlayerFromUserID(event.userid);
+
+    if (!player)
+        return;
+
+    MessageSound(&quot;hello&quot;, &quot;hi&quot;, &quot;*vo/npc/male01/hi01.wav&quot;);
+    MessageSound(&quot;police&quot;, &quot;cps&quot;, &quot;*vo/npc/male01/cps01.wav&quot;);
+    MessageSound(&quot;yes&quot;, &quot;yeah&quot;, &quot;*vo/npc/male01/yeah02.wav&quot;);
+    MessageSound(&quot;nice&quot;, null, &quot;*vo/npc/male01/nice.wav&quot;);
+}
+
+function MessageSound(keyword1, keyword2, soundpath)
+{
+    if (!player || !player.IsValid())
+        return;
+
+    local text = msg.tolower();
+
+    if (text.find(keyword1) != null || (keyword2 != null &amp;&amp; text.find(keyword2) != null))
+    {
+        player.PrecacheScriptSound(soundpath);
+        player.EmitSound(soundpath);
+    }
+}
+
+__CollectGameEventCallbacks(this);
+</code></pre></div>
+<p>This is a more advanced one, it will play the sound that you tell it to when a player types the keyword you want, for example if a player types "yes" or "yeah" they will emit the "yeah" voiceline from the hl2 citizens. This script is optimized to use a specific function so it doesnt get bloated.</p>
+<div class="highlight"><pre><span></span><code>local old_kill = OnPlayerKilled;
+
+function OnPlayerKilled(player, attacker)
+{
+    old_kill(player, attacker)
+    local maxhealth = player.GetMaxHealth();
+    attacker.SetHealth(maxhealth);
+}
+</code></pre></div>
+<p>Health on kill! Very simple.</p>
+<div class="highlight"><pre><span></span><code>local ent = null;
+
+while ((ent = Entities.FindByName(ent, &quot;prop_roller&quot;)) != null)
+{
+    local pos = ent.GetOrigin();
+    local ang = ent.GetAngles();
+
+    local propTable = 
+    {
+        targetname = &quot;roller&quot;,
+        origin = pos,
+        angles = ang,
+        model = &quot;models/roller.mdl&quot;
+    }
+
+    local myProp = SpawnEntityFromTable(&quot;prop_dynamic_override&quot;, propTable);
+    myProp.SetSolid(0);
+}
+</code></pre></div>
+<p>This is more important than fun, but ill still add it, in this case it will create a prop in the position of any entity called "prop_roller", this allows us to create custom entities.</p>
+<p>In hammer you will create an info_target entity and name it "prop_roller" everytime you run the script a roller will spawn in the position of the entity without physics nor collision.</p>
+<div class="highlight"><pre><span></span><code>for (local i = 1; i &lt;= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+    NetProps.SetPropString(player, &quot;m_szNetname&quot;, &quot;Snakez&quot;)
+
+}
+</code></pre></div>
+<p>This will kinda change all players name into another one, in this case everyone will be named Snakez. It only seems to work for chat though.</p>
 <h2 id="challenges">Challenges<a class="headerlink" href="#challenges" title="Permanent link">&para;</a></h2>
 <p>Work in progress.</p>
 <h2 id="whats-next">Whats next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
