@@ -383,6 +383,131 @@ if (x == null)
 }
 ```
 
+## Arrays
+
+An array is a list where every object has an index, and they always start at zero.
+
+```squirrel
+local letters = [
+    "a",
+    "b",
+    "c"
+];
+
+printl(letters[0]);
+printl(letters[1]);
+printl(letters[2]);
+```
+
+This code is very simple, in this case we create an array called letters, that has "a", "b" and "c" inside of it.
+
+Then we print the letter using this syntax `printl(letters[index])` in this case it will print something like
+
+```squirrel
+a
+b
+c
+```
+
+You can also add elements through the script using:
+
+```squirrel
+letters.append("d");
+```
+
+That will add d to the array, it always adds as the last index, so in THIS case it will be `letters[3]`
+
+```squirrel
+letters.remove(1);
+```
+
+We can also remove elements from the array, in this case it removes "b" because it has index 1. And then c becomes index 1.
+
+## Tables
+
+Instead of using an index, it uses keys, works as a dictionary of values.
+
+```squirrel
+local wordData =
+{
+    word = "Hello123",
+    letters = "Hello",
+    numbers = "123"
+};
+
+printl(wordData.word);
+printl(wordData.letters);
+printl(wordData["numbers"]);
+```
+
+In this case we are creating a new table called `wordData` that has a few keys, `word`, `letters` and `numbers` and then we print them using the syntax `printl(table.key)` thats the first way of accessing them, you can also do it like this `printl(table["key"])` both ways work the same.
+
+## Foreach
+
+This is where it gets good, when you want to check everything on a table/array most of the time the most optimal way of doing it is with a foreach, instead of a normal loop.
+
+```squirrel
+local letters = [
+    "a",
+    "b",
+    "c"
+];
+
+foreach (letter in letters)
+{
+	printl(letter)
+}
+```
+
+The foreach does two things at once, first it creates a temporal variable, in this case called "letter" and it will be used for anything inside the foreach, "letter" is asigned to every value inside "letters" so "a" is "letter".
+
+```squirrel
+foreach (tempVariable in array/table)
+{
+    printl(tempVariable);
+}
+```
+
+If you put name "tempVariable" something like banana it will still work, but you must get right the name of the array/table.
+
+```squirrel
+local wordData =
+{
+    word = "Hello123",
+    letters = "Hello",
+    numbers = "123"
+};
+
+foreach (value in wordData)
+{
+    printl(value);
+}
+```
+
+This example is almost the same as the one before, in this case we made a table.
+
+!!! warning "Must know"
+	
+	The values wont come in the original order you chose, tables dont work by order.
+
+The interesting part about using foreach with tables is that you can get the keys.
+
+```
+local wordData =
+{
+    word = "Hello123",
+    letters = "Hello",
+    numbers = "123"
+};
+
+foreach (key, value in wordData)
+{
+    printl(key + " = " + value);
+}
+```
+
+In this case it will print something like `word = Hello123` this is specially useful when you want to know which value is which.
+
 ## Extras
 
 ### What is print?

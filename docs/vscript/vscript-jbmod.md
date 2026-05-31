@@ -386,11 +386,231 @@ As you can see we use the handle instead of the name, this works better with fun
 
 ## NetProps
 
-Work in Progress.
+NetProps (known as Networked Properties) are the internal variables of an entity. Some of them have a public function, while others dont.
+
+A player can have health, armor, speed, position, weapons, active weapon, render color and tons of other stuff, everything can be modified through NetProps
+
+```squirrel
+player.SetHealth(100);
+```
+
+This is the public function to set the health of a player.
+
+```squirrel
+NetProps.SetPropInt(player, "m_iHealth", 100);
+```
+
+This is how you do it with NetProps, in this case we should always use the public function because is the secure way of doing, but. What happens when you dont have any function for whatever you want to do?
+
+```squirrel
+NetProps.GetPropString(player, "m_szNetworkIDString")
+```
+
+right know there is NO function for getting a steam id, so this is the way of doing it.
+
+```squirrel
+for (local i = 1; i <= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+	local SteamID = NetProps.GetPropString(player, "m_szNetworkIDString")
+	
+	if (SteamID == "[U:1:1201533202]")
+		printl("The user is Cayama0811")
+	else if (SteamID == "BOT")
+		printl("The user is a BOT")
+	else
+		printl("The user is not Cayama0811, nor a BOT.")
+		
+	printl(SteamID)
+}
+```
+
+In this case this code checks all the players on the game (like a previous example) and then it gets the string (text) of the SteamID of all the players, if the SteamID equals to mine, yes my SteamID, the one from the guy who writes all this stuff, then it will print that is mine, if the string equals to "BOT" then it will print that the ID doesnt exist and its actually a BOT, and then every other player that isnt me or a bot will get a diferent print. At the end it prints the actual SteamID.
+
+!!! warning "Must know"
+	
+	m_szNetworkIDString only works with SteamID3, so the format should look something like this `[U:1:1201533202]`, you can visit [this](https://steamid.io/) website to check your SteamID3.
+
+You can try changing the SteamID3 and the name to check how it works.
+
+This is a very secure way of making player specific scripts, like admin commands and such.
+
+### Types of NetProps
+
+As you saw before we used `SetPropInt()` and `GetPropString()` but theres more than just that, we can get and set any value from the NetProps.
+
+```squirrel
+GetPropBool
+GetPropEntity
+GetPropFloat
+GetPropInfo
+GetPropInt
+GetPropString
+GetPropType
+GetPropVector
+
+HasProp
+
+SetPropBool
+SetPropEntity
+SetPropFloat
+SetPropInt
+SetPropString
+SetPropVector
+```
+
+With all of these functions you can Get/Set NetProps as you please, try experimenting with a few of them to check what you can do.
+
+## Tables
+
+As you saw in the vscript syntax guide we can also use tables.
+
+```squirrel
+for (local i = 1; i <= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+    local playerData =
+    {
+        name = player.GetPlayerName(),
+        kills = player.GetFragCount(),
+        deaths = player.GetDeathCount(),
+        SteamID = NetProps.GetPropString(player, "m_szNetworkIDString")
+    };
+    
+    if (playerData.SteamID == "BOT")
+        continue;
+
+    foreach (key, value in playerData)
+    {
+        printl(key + " = " + value);
+    }
+}
+```
+
+This is a simple example that checks for everyone in the game, it prints their name, how much kills theyve got, their death count and their SteamID, useful to get a lot of stats from any player quickly, it also skips bots altogheter.
 
 ## Fun Scripts
 
-Work in Progress.
+This is what you all have been waiting for, the fun.
+
+```squirrel
+if (SERVER)
+{
+    printl("Scanning all players...");
+
+    local p = null;
+
+    while (p = Entities.FindByClassname(p, "player"))
+    {
+        if (!p.IsPlayer())
+            continue;
+
+        printl("Player found: " + p.entindex());
+
+        p.TakeDamage( 100, 2, p )
+
+    }
+}
+```
+
+This simple script works as a global kill, it will kill any player that is alive.
+
+```squirrel
+RegisterScriptGameEventListener("player_say");
+
+function OnGameEvent_player_say(event)
+{
+    msg <- event.text;
+    player <- GetPlayerFromUserID(event.userid);
+	
+    if (!player)
+        return;
+
+    MessageSound("hello", "hi", "*vo/npc/male01/hi01.wav");
+    MessageSound("police", "cps", "*vo/npc/male01/cps01.wav");
+    MessageSound("yes", "yeah", "*vo/npc/male01/yeah02.wav");
+    MessageSound("nice", null, "*vo/npc/male01/nice.wav");
+}
+
+function MessageSound(keyword1, keyword2, soundpath)
+{
+    if (!player || !player.IsValid())
+        return;
+
+    local text = msg.tolower();
+
+    if (text.find(keyword1) != null || (keyword2 != null && text.find(keyword2) != null))
+    {
+        player.PrecacheScriptSound(soundpath);
+        player.EmitSound(soundpath);
+    }
+}
+
+__CollectGameEventCallbacks(this);
+```
+
+This is a more advanced one, it will play the sound that you tell it to when a player types the keyword you want, for example if a player types "yes" or "yeah" they will emit the "yeah" voiceline from the hl2 citizens. This script is optimized to use a specific function so it doesnt get bloated.
+
+```squirrel
+local old_kill = OnPlayerKilled;
+
+function OnPlayerKilled(player, attacker)
+{
+	old_kill(player, attacker)
+	local maxhealth = player.GetMaxHealth();
+	attacker.SetHealth(maxhealth);
+}
+```
+
+Health on kill! Very simple.
+
+```
+local ent = null;
+
+while ((ent = Entities.FindByName(ent, "prop_roller")) != null)
+{
+    local pos = ent.GetOrigin();
+    local ang = ent.GetAngles();
+    
+    local propTable = 
+    {
+        targetname = "roller",
+        origin = pos,
+        angles = ang,
+        model = "models/roller.mdl"
+    }
+    
+    local myProp = SpawnEntityFromTable("prop_dynamic_override", propTable);
+    myProp.SetSolid(0);
+}
+```
+
+This is more important than fun, but ill still add it, in this case it will create a prop in the position of any entity called "prop_roller", this allows us to create custom entities.
+
+In hammer you will create an info_target entity and name it "prop_roller" everytime you run the script a roller will spawn in the position of the entity without physics nor collision.
+
+```squirrel
+for (local i = 1; i <= MaxClients(); i++)
+{
+    local player = GetPlayerByIndex(i);
+
+    if (!player)
+        continue;
+
+	NetProps.SetPropString(player, "m_szNetname", "Snakez")
+
+}
+```
+
+This will kinda change all players name into another one, in this case everyone will be named Snakez. It only seems to work for chat though.
 
 ## Challenges
 
